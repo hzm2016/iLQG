@@ -14,8 +14,6 @@ import time
 
 Codes originally from https://github.com/flforget/DDP
 Algorithm based on Synthesis and Stabilization of Complex Behaviors through Online Trajcetory Optimization
-
-
 '''
 
 
@@ -38,6 +36,7 @@ Algorithm based on Synthesis and Stabilization of Complex Behaviors through Onli
 
 
 class iLQRSolver:
+
     def __init__(self, model, costFunction):
         
         # Initializations 
@@ -50,15 +49,15 @@ class iLQRSolver:
         self.T = 50
         self.dt = 1e-4
         self.iterMax = 20
-        self.stopCriteria = 1e-3 # Could be fixed
+        self.stopCriteria = 1e-3  # Could be fixed
        
         self.changePass = 0.0
         self.changeAmount = 0.0
         self.prevAmount = 0.0
-	self.flag_BackwardPass = False
+        self.flag_BackwardPass = False
         self.flag_ForwardPass = False 
-        self.X = np.zeros((self.model.stateNumber, 1)) # (x, y, z) coordinates, stateNumber = 3
-        self.U = np.zeros((self.model.commandNumber, 1)) # commandNumber = 6
+        self.X = np.zeros((self.model.stateNumber, 1))  # (x, y, z) coordinates, stateNumber = 3
+        self.U = np.zeros((self.model.commandNumber, 1))  # commandNumber = 6
         self.nextX = np.zeros((self.model.stateNumber, 1))
         self.XList = []
         self.UList = []
@@ -66,11 +65,10 @@ class iLQRSolver:
         self.nextUList = []
         
         # Parameters for running conditions
-        self.alpha = 1.0 #backtracking line-search parameter 0 < alpha <= 1
+        self.alpha = 1.0  # backtracking line-search parameter 0 < alpha <= 1
         self.alphaList = [1.0, 0.8, 0.6, 0.4, 0.2] # Could be fixed
-        self.mu = 0.0 # the roloe of a Lavenberg-Marquardt parameter
-        self.muEye = self.mu*np.eye(self.model.stateNumber, dtype = float)
-        
+        self.mu = 0.0  # the roloe of a Lavenberg-Marquardt parameter
+        self.muEye = self.mu*np.eye(self.model.stateNumber, dtype=float)
         self.zerosCommand = np.zeros((self.model.commandNumber, 1))
         
         self.kList = []
@@ -89,6 +87,7 @@ class iLQRSolver:
         self.nextVxx = np.zeros((self.model.stateNumber, self.model.stateNumber))
     
     def trajectoryOptimizer(self, Xinit, Xdes, T, dt, iterMax = 20, stopCrit = 1e-3):
+
         #initialization
         self.Xinit = Xinit
         self.Xdes = Xdes
@@ -96,20 +95,21 @@ class iLQRSolver:
         self.dt = dt
         self.iterMax = iterMax
         self.stopCrit = stopCrit
-        
         self.initTrajectory()
+
         for iter in range(iterMax):
             self.backwardLoop()
-	    self.alpha = (iterMax - iter)/iterMax
+            self.alpha = (iterMax - iter)/iterMax
             self.forwardLoop()
             self.XList = self.nextXList
             self.UList = self.nextUList
-            if(self.changeAmount < self.stopCrit): 
+            if self.changeAmount < self.stopCrit:
+                print("pass")
+                break
                 # condition for ending the iterations
                 # changeAmount is updated in forwardLoop()
                 #self.alpha = self.alphaLis[
-		print "pass"
-		break
+
         return self.XList, self.UList
         
     def initTrajectory(self):
@@ -128,9 +128,10 @@ class iLQRSolver:
         self.nextVxx = self.costFunction.lxx
         self.mu = 0.0001
         self.flag_BackwardPass = False
+
         while(self.flag_BackwardPass == 0):
-	    self.flag_BackwardPass = True
-            self.muEye = self.mu * np.eye(self.nextVxx.shape[0], dtype = float)
+            self.flag_BackwardPass = True
+            self.muEye = self.mu * np.eye(self.nextVxx.shape[0], dtype=float)
             for i in range(self.T-1, -1, -1):
                 self.X = self.XList[i]
                 self.U = self.UList[i]
@@ -218,20 +219,22 @@ class iLQRSolver:
 	'''
     def forwardLoop(self):
         self.nextXList = [self.Xinit]
-	#self.nextUList = []
+        #self.nextUList = []
         self.nextUList = [self.zerosCommand for i in range(self.T)]
-	self.changeAmount = 0.0
-	self.nextXList[0] = self.Xinit
-	# Line search to be implemented
-	self.alpha = self.alphaList[0]
-	for i in range(self.T):
+        self.changeAmount = 0.0
+        self.nextXList[0] = self.Xinit
+        # Line search to be implemented
+        self.alpha = self.alphaList[0]
+
+        for i in range(self.T):
             self.nextUList[i] = self.UList[i] + self.alpha*self.kList[i] + np.dot(self.KList[i],(self.nextXList[i] - self.XList[i]))
-	    self.model.computeNextState(self.dt,self.nextXList[i],self.nextUList[i])
-	    self.nextXList.append(self.model.nextX)
-	    for j in range(self.model.commandNumber):
-		#self.changeAmount += np.abs(self.UList[j] - self.nextUList[j])
+            self.model.computeNextState(self.dt,self.nextXList[i],self.nextUList[i])
+            self.nextXList.append(self.model.nextX)
+            for j in range(self.model.commandNumber):
                 self.changeAmount += np.sum(np.abs(np.subtract(self.UList[j], self.nextUList[j])))
-	return 0
+            #self.changeAmount += np.abs(self.UList[j] - self.nextUList[j])
+
+            return 0
 
 
 

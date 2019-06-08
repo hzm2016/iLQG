@@ -26,17 +26,15 @@ class BaxterDynamicModel:
         self.stateNumber = 3
         self.commandNumber = 3
         
-        self.fx = np.zeros((3,3))
-        self.fu = np.zeros((3,3))
+        self.fx = np.zeros((3, 3))
+        self.fu = np.zeros((3, 3))
         
-	self.B = np.matrix([[1.0, 0.0, 0.0],
-			    [0.0, 1.0, 0.0],
-			    [0.0, 0.0, 1.0]
-			])
-	self.Bd = np.matrix([[1.0, 0.0, 0.0],
-			    [0.0, 1.0, 0.0],
-			    [0.0, 0.0, 1.0]
-			])
+        self.B = np.matrix([[1.0, 0.0, 0.0],
+                            [0.0, 1.0, 0.0],
+                            [0.0, 0.0, 1.0]])
+        self.Bd = np.matrix([[1.0, 0.0, 0.0],
+                             [0.0, 1.0, 0.0],
+                             [0.0, 0.0, 1.0]])
                
         # fxx 3x3  x 3
         self.fxx = list()
@@ -58,12 +56,9 @@ class BaxterDynamicModel:
         self.fxu = list()
         self.fxu.append(np.zeros((3,3)))
     
-    def computeNextState(self,dt,X,U):
+    def computeNextState(self, dt, X, U):
         self.Bd = dt*self.B
-	#print self.Bd
-	#print "-----"
-	#print U
-        self.nextX = np.dot((self.Bd + np.eye(3)),self.X) + np.dot(self.Bd,U)
+        self.nextX = np.dot((self.Bd + np.eye(3)), self.X) + np.dot(self.Bd, U)
         #self.nextX = X + U
         return 0
     

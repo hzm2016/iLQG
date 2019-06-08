@@ -6,8 +6,8 @@ import numpy as np
 import numpy.linalg
 
 #Cost function and Dynamic Model
-from costFunction import *
-from dynamicModel import *
+# from costFunction import *
+# from dynamicModel import *
 import time
 
 '''
@@ -85,8 +85,9 @@ class iLQRSolver:
         self.Qux = np.zeros((self.model.commandNumber, self.model.stateNumber))  # 6x3
         self.nextVx = np.zeros((self.model.stateNumber, 1))
         self.nextVxx = np.zeros((self.model.stateNumber, self.model.stateNumber))
-    
+
     def trajectoryOptimizer(self, Xinit, Xdes, T, dt, iterMax = 20, stopCrit = 1e-3):
+
         #initialization
         self.Xinit = Xinit
         self.Xdes = Xdes
@@ -185,4 +186,3 @@ class iLQRSolver:
             for j in range(self.model.commandNumber):
                 self.changeAmount += np.abs(self.UList[j] - self.nextUList[j])
         return 0
-                    

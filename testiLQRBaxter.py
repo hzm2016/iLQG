@@ -9,18 +9,9 @@ from random import uniform
 import time
 
 
-Xinit = np.matrix([ [0.0],
-                    [0.0],
-                    [0.0],
-                    ])
-Xinit = np.matrix([ [uniform(-10,10)],
-                    [uniform(-10,10)],
-                    [uniform(-10,10)],
-                    ])
-Xdes = np.matrix([  [uniform(-10,10)],
-                    [uniform(-10,10)],
-                    [uniform(-10,10)],
-                    ])
+Xinit = np.matrix([[0.0], [0.0], [0.0], ])
+Xinit = np.matrix([[uniform(-10, 10)], [uniform(-10, 10)], [uniform(-10, 10)], ])
+Xdes = np.matrix([[uniform(-10, 10)], [uniform(-10, 10)], [uniform(-10, 10)],])
 XList = list()
 UList = list()
 XListtmp = list()
@@ -35,25 +26,25 @@ if (traj):
     M = 5
 else:
     M = 1
-trajList = list([Xdes,Xdes,Xdes,Xdes,Xdes])
+trajList = list([Xdes, Xdes, Xdes, Xdes, Xdes])
 dt = 1e-4
 
 model = BaxterDynamicModel()
 costFunction = CostFunctionBaxter()
 
-print "X init_Original"
-print Xinit
-print "X destination_Original"
-print Xdes
+print("X init_Original")
+print(Xinit)
+print("X destination_Original")
+print(Xdes)
+print(" ")
+print(" ")
+print("--------")
+solver = iLQRSolver(model, costFunction)
 
-print " "
-print " "
-print "--------"
-solver = iLQRSolver(model,costFunction)
 for i in range(M):
     Xdes = trajList[i]
     initTime = time.time()
-    XListtmp,UListtmp = solver.trajectoryOptimizer(Xinit,Xdes,N,dt, 500,1e-3)
+    XListtmp, UListtmp = solver.trajectoryOptimizer(Xinit, Xdes, N, dt, 500, 1e-3)
     endTime = time.time() - initTime
     timeList.append(endTime/N)
     XList += XListtmp
@@ -80,12 +71,11 @@ for i in range(M*N):
 # print tauList
 # print XList
 # print UList
-print timeList
-
-print "X init"
-print Xinit
-print "X destination"
-print Xdes
+print(timeList)
+print("X init")
+print(Xinit)
+print("X destination")
+print(Xdes)
 
 fig0 = pl.figure ()
 
@@ -123,6 +113,6 @@ ax1.grid()
 bx1.grid()
 cx1.grid()
 
-print costFunction.computeCostValue(N,XList,Xdes,UList)
+print(costFunction.computeCostValue(N,XList,Xdes,UList))
 
 pl.show()

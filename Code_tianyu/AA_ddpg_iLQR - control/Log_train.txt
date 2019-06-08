@@ -1,0 +1,25 @@
+Episode: 0  Reward: -6.77  Rps: -0.068  Explore: 0.10  processY: 0.250  Step: 100 
+Episode: 1  Reward: -12.75  Rps: -0.127  Explore: 0.10  processY: 0.203  Step: 100 
+Episode: 2  Reward: -12.15  Rps: -0.121  Explore: 0.10  processY: 0.186  Step: 100 
+Episode: 3  Reward: -8.48  Rps: -0.089  Explore: 0.10  processY: 0.985  Step: 95  done 
+Episode: 4  Reward: -13.06  Rps: -0.152  Explore: 0.10  processY: 0.995  Step: 86  done 
+Episode: 5  Reward: 0.81  Rps: 0.017  Explore: 0.10  processY: 0.996  Step: 47  done 
+Episode: 6  Reward: 0.83  Rps: 0.021  Explore: 0.10  processY: 0.987  Step: 40  done 
+Episode: 7  Reward: -7.47  Rps: -0.107  Explore: 0.10  processY: 0.994  Step: 70  done 
+Episode: 8  Reward: -9.19  Rps: -0.121  Explore: 0.10  processY: 0.995  Step: 76  done 
+Episode: 9  Reward: -1.78  Rps: -0.148  Explore: 0.10  processY: -0.020  Step: 12  coercion 
+Episode: 10  Reward: -1.18  Rps: -1.184  Explore: 0.10  processY: -0.045  Step: 1  coercion 
+Episode: 11  Reward: -1.21  Rps: -1.212  Explore: 0.10  processY: -0.045  Step: 1  coercion 
+Episode: 12  Reward: -1.15  Rps: -1.148  Explore: 0.10  processY: -0.041  Step: 1  coercion 
+Episode: 13  Reward: -10.21  Rps: -0.138  Explore: 0.10  processY: 0.987  Step: 74  done 
+Episode: 14  Reward: -4.60  Rps: -0.074  Explore: 0.10  processY: 0.977  Step: 62  done 
+Episode: 15  Reward: -15.60  Rps: -0.156  Explore: 0.10  processY: 0.240  Step: 100 
+Episode: 16  Reward: -11.51  Rps: -0.122  Explore: 0.10  processY: 0.990  Step: 94  done 
+Episode: 17  Reward: -6.00  Rps: -0.060  Explore: 0.10  processY: 0.146  Step: 100 
+Episode: 18  Reward: -13.99  Rps: -0.209  Explore: 0.10  processY: -0.030  Step: 67  coercion 
+Episode: 19  Reward: -0.99  Rps: -0.495  Explore: 0.10  processY: -0.013  Step: 2  coercion 
+Episode: 20  Reward: -10.64  Rps: -0.187  Explore: 0.10  processY: -0.044  Step: 57  coercion 
+Episode: 21  Reward: -1.10  Rps: -1.098  Explore: 0.10  processY: -0.040  Step: 1  coercion 
+Episode: 22  Reward: -12.17  Rps: -0.122  Explore: 0.10  processY: 0.119  Step: 100 
+Episode: 23  Reward: -1.78  Rps: -0.445  Explore: 0.10  processY: -0.026  Step: 4  coercion 
+Episode: 24  Reward: -1.09  Rps: -1.092  Explore: 0.10  processY: -0.039  Step: 1  coercion 
